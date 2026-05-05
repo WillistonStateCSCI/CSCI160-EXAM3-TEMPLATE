@@ -1,0 +1,191 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Test 1 - getters, setters and setQuantity()
+      id: test-1-getters-setters-and-setquantity
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 1 - getters, setters and setQuantity()
+        setup-command: javac src/*.java
+        command: java -cp src Main products1.txt
+        input: ''
+        expected-output: |-
+          Invalid Quantity!
+          After attempting to set B002 quantity to -5:
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 2 - toString()
+      id: test-2-tostring
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 2 - toString()
+        setup-command: 'javac src/*.java '
+        command: 'java -cp src Main products1.txt '
+        input: ''
+        expected-output: |-
+          Invalid Quantity!
+          After attempting to set B002 quantity to -5:
+          [B002] Data Structures in Java - $74.5 (qty: 15)
+
+          Updated quantity to 17
+          After attempting to set B002 quantity to 17:
+          [B002] Data Structures in Java - $74.5 (qty: 17)
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 3 - loadProducts()
+      id: test-3-loadproducts
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 3 - loadProducts()
+        setup-command: 'javac src/*.java '
+        command: 'java -cp src Main products1.txt '
+        input: ''
+        expected-output: |-
+          === Campus Store Inventory ===
+          [B001] Intro to Java - $89.99 (qty: 30)
+          [B002] Data Structures in Java - $74.5 (qty: 17)
+          [B003] Calculus for Engineers - $120.0 (qty: 10)
+          [S001] Granola Bar - $1.99 (qty: 100)
+          [S002] Chips - $0.99 (qty: 200)
+          [S003] Protein Bar - $2.49 (qty: 75)
+          [B004] Computer Science Fundamentals - $95.0 (qty: 20)
+          [S004] Fruit Snacks - $1.49 (qty: 150)
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 4 - findProductById() with products1.txt
+      id: test-4-findproductbyid-with-products1-txt
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 4 - findProductById() with products1.txt
+        setup-command: 'javac src/*.java '
+        command: java -cp src Main products1.txt
+        input: ''
+        expected-output: |-
+          Attempting to find S005
+          null
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 5 - findProductById() with products2.txt
+      id: test-5-findproductbyid-with-products2-txt
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 5 - findProductById() with products2.txt
+        setup-command: 'javac src/*.java '
+        command: 'java -cp src Main products2.txt '
+        input: ''
+        expected-output: |-
+          Attempting to find S005
+          [S005] Popcorn - $1.59 (qty: 160)
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 6 - purchaseProduct()
+      id: test-6-purchaseproduct
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 6 - purchaseProduct()
+        setup-command: javac src/*.java
+        command: java -cp src Main products1.txt
+        input: ''
+        expected-output: |-
+          === Purchase ===
+          Updated quantity to 17
+          [B001] Intro to Java - $89.99 (qty: 17)
+
+          === Purchase ===
+          Invalid Purchase Attempt!
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 7 - getPriceWithTax()
+      id: test-7-getpricewithtax
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 7 - getPriceWithTax()
+        setup-command: 'javac src/*.java  '
+        command: java -cp src Main products2.txt
+        input: ''
+        expected-output: |-
+          === Campus Store Inventory ===
+          [B001] Advanced Algorithms - $110.75 (qty: 12)
+          [B002] Introduction to Databases - $85.25 (qty: 17)
+          [B003] Discrete Mathematics Essentials - $69.99 (qty: 25)
+          [B004] Object-Oriented Design - $92.0 (qty: 14)
+          [S001] Trail Mix - $2.99 (qty: 90)
+          [S002] Chocolate Cookies - $3.49 (qty: 120)
+          [S003] Rice Cakes - $1.89 (qty: 80)
+          [S004] Pretzels - $2.29 (qty: 140)
+          [B005] Operating Systems Basics - $105.5 (qty: 9)
+          [S005] Popcorn - $1.59 (qty: 160)
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Test 8 - totalInventoryValue() with products1.txt
+      id: test-8-totalinventoryvalue-with-products1-txt
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 8 - totalInventoryValue() with products1.txt
+        setup-command: javac src/*.java
+        command: java -cp src Main products1.txt
+        input: ''
+        expected-output: 'Total inventory value: 6703.58'
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 9 - totalInventoryValue() with products2.txt
+      id: test-9-totalinventoryvalue-with-products2-txt
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 9 - totalInventoryValue() with products2.txt
+        setup-command: 'javac src/*.java  '
+        command: java -cp src Main products2.txt
+        input: ''
+        expected-output: 'Total inventory value: 7968.6'
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Test 10 - getSummary()
+      id: test-10-getsummary
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 10 - getSummary()
+        setup-command: 'javac src/*.java  '
+        command: 'java -cp src Main products1.txt '
+        input: ''
+        expected-output: |-
+          === Summary ===
+          Products: 8 | Total units: 589 | Total inventory value: 6703.58 | Most expensive: Calculus for Engineers
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-1-GETTERS-SETTERS-AND-SETQUANTITY_RESULTS: "${{steps.test-1-getters-setters-and-setquantity.outputs.result}}"
+        TEST-2-TOSTRING_RESULTS: "${{steps.test-2-tostring.outputs.result}}"
+        TEST-3-LOADPRODUCTS_RESULTS: "${{steps.test-3-loadproducts.outputs.result}}"
+        TEST-4-FINDPRODUCTBYID-WITH-PRODUCTS1-TXT_RESULTS: "${{steps.test-4-findproductbyid-with-products1-txt.outputs.result}}"
+        TEST-5-FINDPRODUCTBYID-WITH-PRODUCTS2-TXT_RESULTS: "${{steps.test-5-findproductbyid-with-products2-txt.outputs.result}}"
+        TEST-6-PURCHASEPRODUCT_RESULTS: "${{steps.test-6-purchaseproduct.outputs.result}}"
+        TEST-7-GETPRICEWITHTAX_RESULTS: "${{steps.test-7-getpricewithtax.outputs.result}}"
+        TEST-8-TOTALINVENTORYVALUE-WITH-PRODUCTS1-TXT_RESULTS: "${{steps.test-8-totalinventoryvalue-with-products1-txt.outputs.result}}"
+        TEST-9-TOTALINVENTORYVALUE-WITH-PRODUCTS2-TXT_RESULTS: "${{steps.test-9-totalinventoryvalue-with-products2-txt.outputs.result}}"
+        TEST-10-GETSUMMARY_RESULTS: "${{steps.test-10-getsummary.outputs.result}}"
+      with:
+        runners: test-1-getters-setters-and-setquantity,test-2-tostring,test-3-loadproducts,test-4-findproductbyid-with-products1-txt,test-5-findproductbyid-with-products2-txt,test-6-purchaseproduct,test-7-getpricewithtax,test-8-totalinventoryvalue-with-products1-txt,test-9-totalinventoryvalue-with-products2-txt,test-10-getsummary

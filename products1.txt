@@ -1,0 +1,8 @@
+BOOK,B001,Intro to Java,89.99,30,John Doe
+BOOK,B002,Data Structures in Java,74.50,15,Jane Smith
+BOOK,B003,Calculus for Engineers,120.00,10,Alan Turing
+SNACK,S001,Granola Bar,1.99,100,true
+SNACK,S002,Chips,0.99,200,false
+SNACK,S003,Protein Bar,2.49,75,true
+BOOK,B004,Computer Science Fundamentals,95.00,20,Grace Hopper
+SNACK,S004,Fruit Snacks,1.49,150,true

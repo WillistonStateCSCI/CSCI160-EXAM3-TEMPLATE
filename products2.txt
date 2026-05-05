@@ -1,0 +1,10 @@
+BOOK,B001,Advanced Algorithms,110.75,12,Emily Carter
+BOOK,B002,Introduction to Databases,85.25,18,Michael Nguyen
+BOOK,B003,Discrete Mathematics Essentials,69.99,25,Sarah Lee
+BOOK,B004,Object-Oriented Design,92.00,14,David Kim
+SNACK,S001,Trail Mix,2.99,90,true
+SNACK,S002,Chocolate Cookies,3.49,120,false
+SNACK,S003,Rice Cakes,1.89,80,true
+SNACK,S004,Pretzels,2.29,140,false
+BOOK,B005,Operating Systems Basics,105.50,9,Linda Martinez
+SNACK,S005,Popcorn,1.59,160,true
